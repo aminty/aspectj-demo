@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
-@Component
+
 public class UserService {
     UserRepo userRepo;
 
@@ -38,6 +41,21 @@ public class UserService {
 
     public void sampleTwo(){
         System.out.println("sample two method");
+    }
+
+    public String sleepMethod() throws InterruptedException {
+        Thread.sleep(1_000);
+        return "hello";
+    }
+
+
+    public List<String> getSomeStr(){
+        List<String> myList=new ArrayList<>();
+        myList.add("amin");
+        myList.add("ali");
+        myList.add("reza");
+
+        return myList;
     }
 
 }

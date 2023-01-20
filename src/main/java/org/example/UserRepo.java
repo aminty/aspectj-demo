@@ -1,6 +1,10 @@
 package org.example;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserRepo {
@@ -20,5 +24,8 @@ public class UserRepo {
     public void deleteUser(){
         System.out.println("found user was deleted");
     }
+
+
+
 
 }

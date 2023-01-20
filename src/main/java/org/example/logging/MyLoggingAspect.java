@@ -1,10 +1,12 @@
 package org.example.logging;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 
 @Aspect
 @Component
@@ -36,7 +38,39 @@ public class MyLoggingAspect {
         System.out.println("for all method and sample one and sample two excluded");
     }
 
+    @Around("execution(* org.example.UserService.sleepMethod())")
+    public void calcTime(ProceedingJoinPoint pj) throws Throwable {
 
+        Long start= System.currentTimeMillis();
+        System.out.println(start);
+        Object result = pj.proceed();
+        System.out.println(result);
+        Long end=System.currentTimeMillis();
+        System.out.println("--------------------------------------------");
+        System.out.println(end);
+        System.out.println(end-start);
+
+    }
+
+
+
+    @AfterReturning(
+            pointcut = "execution(* org.example.UserService.getSomeStr())",
+            returning = "result"
+    )
+    public void getAfterReturningForgetSomeStr(JoinPoint jp, List<String> result){
+
+        String methodSignature=jp.getSignature().toString();
+        System.out.println(methodSignature);
+
+        for (String s: result
+             ) {
+            System.out.println(s);
+
+        }
+
+
+    }
 
 
    /*
